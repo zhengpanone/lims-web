@@ -11,4 +11,11 @@ export default defineConfig({
       '@': path.join(__dirname, 'src'),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@/styles/variables.scss";',
+      },
+    },
+  },
 })

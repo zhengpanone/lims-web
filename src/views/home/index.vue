@@ -13,7 +13,7 @@ const addAge = () => {
 }
 </script>
 <style scoped lang="scss">
-@import '@/styles/variables.scss';
+// @import '@/styles/variables.scss'; // 通过构建工具自动注入全局变量
 
 h1 {
     color: $color;
