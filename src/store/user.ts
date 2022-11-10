@@ -15,4 +15,9 @@ export const useUserStore = defineStore('user', {
       this.age = age
     },
   },
+  getters: {
+    fullName: (state) => {
+      return state.name + '丰'
+    },
+  },
 })

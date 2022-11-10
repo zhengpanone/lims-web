@@ -12,6 +12,10 @@ const addAge = () => {
     userStore.updateAge(++userStore.age)
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
+@import '@/styles/variables.scss';
 
+h1 {
+    color: $color;
+}
 </style>

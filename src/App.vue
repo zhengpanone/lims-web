@@ -5,9 +5,6 @@ import HelloWorld from '@/components/HelloWorld.vue'
 </script>
 
 <template>
-  <div>
-    App
-  </div>
   <hello-world msg="Vite + Vue" />
   <router-view />
 </template>
