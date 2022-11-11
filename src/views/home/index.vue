@@ -1,5 +1,6 @@
 <template>
     <h1>首页</h1>
+    <el-button>测试按钮</el-button>
     <div>
         {{ userStore.name }}的年龄：{{ userStore.age }}<br />
         <button @click="addAge">点击给{{ userStore.name }}的年龄增加一岁</button>
