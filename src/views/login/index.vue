@@ -7,7 +7,7 @@ import { onMounted } from 'vue'
 
 onMounted(() => {
     getLoginInfo().then(res => {
-        console.log(res);
+        console.log(res.data);
 
     })
 })

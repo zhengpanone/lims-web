@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 
 const request = axios.create({
   baseURL: 'http://127.0.0.1:8081',
@@ -24,4 +24,8 @@ axios.interceptors.response.use(
   }
 )
 
-export default request
+export default <T = any>(config: AxiosRequestConfig) => {
+  return request(config).then((res) => {
+    return res.data as T
+  })
+}
