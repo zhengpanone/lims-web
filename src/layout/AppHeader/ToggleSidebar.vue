@@ -13,5 +13,7 @@ const store = indexStore()
 
 </script>
 <style scoped>
-
+.el-icon {
+    cursor: pointer;
+}
 </style>
