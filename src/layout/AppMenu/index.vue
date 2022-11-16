@@ -1,6 +1,6 @@
 <template>
-    <el-menu active-text-color="#ffd04b" background-color="#304156" class="el-menu-vertical-demo" default-active="2"
-        text-color="#fff" router>
+    <el-menu active-text-color="#ffd04b" background-color="#304156" default-active="2" text-color="#fff"
+        :collapse="store.isCollapse" router>
         <el-menu-item index="/">
             <el-icon>
                 <icon-menu />
@@ -54,9 +54,17 @@ import {
     Location,
     Setting,
 } from '@element-plus/icons-vue'
+import { indexStore } from '@/store/index'
+const store = indexStore()
+
 </script>
 <style scoped lang="scss">
 .el-menu {
     border-right: none;
+}
+
+.el-menu:not(.el-menu--collapse) {
+    width: 200px;
+    height: 100vh;
 }
 </style>
