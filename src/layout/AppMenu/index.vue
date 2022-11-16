@@ -26,7 +26,7 @@
                 </el-icon>
                 <span>订单</span>
             </template>
-            <el-menu-item index="/product/product_list">商品列表</el-menu-item>
+            <el-menu-item index="">订单列表</el-menu-item>
         </el-sub-menu>
         <el-menu-item index="4">
             <el-icon>
@@ -34,16 +34,16 @@
             </el-icon>
             <span>媒体</span>
         </el-menu-item>
-        <el-sub-menu index="/product">
+        <el-sub-menu index="/">
             <template #title>
                 <el-icon>
                     <location />
                 </el-icon>
                 <span>权限</span>
             </template>
-            <el-menu-item index="/product/product_list">角色</el-menu-item>
-            <el-menu-item index="/product/product_list">管理员</el-menu-item>
-            <el-menu-item index="/product/product_list">权限规则</el-menu-item>
+            <el-menu-item index="/">角色</el-menu-item>
+            <el-menu-item index="/">管理员</el-menu-item>
+            <el-menu-item index="/">权限规则</el-menu-item>
         </el-sub-menu>
     </el-menu>
 </template>

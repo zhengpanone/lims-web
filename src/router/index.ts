@@ -11,6 +11,9 @@ const routes: RouteRecordRaw[] = [
         path: '', // 默认子路由
         name: 'home',
         component: () => import('@/views/home/index.vue'),
+        meta: {
+          title: '首页',
+        },
       },
       ProductRoutes,
     ],
