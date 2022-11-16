@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import ProductRoutes from './modules/product'
 import AppLayout from '@/layout/AppLayout.vue'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -28,6 +30,14 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHashHistory(), // 路由模式
   routes,
+})
+
+router.beforeEach(() => {
+  nprogress.start()
+})
+
+router.afterEach(() => {
+  nprogress.done()
 })
 
 export default router
