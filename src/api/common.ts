@@ -28,7 +28,7 @@ export const login = (data: {
   pwd: string
   imgCode: string
 }) => {
-  return request<ILoginRresponse>({
+  return request<IResponseData<ILoginRresponse>>({
     method: 'POST',
     url: '/api/user/login',
     data,

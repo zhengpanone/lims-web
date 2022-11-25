@@ -50,6 +50,7 @@ import { User, Lock, Key } from '@element-plus/icons-vue';
 import { ElForm } from 'element-plus';
 import router from '@/router/index';
 import type { IElForm, IFormRule } from '@/types/element-plus'
+import { indexStore } from '@/store/index'
 
 const captchaSrc = ref('') // 验证码图片src
 const form = ref<IElForm | null>(null) // 登录表单
@@ -65,6 +66,8 @@ const rules = reactive<IFormRule>({
     imgCode: [{ required: true, message: '请输入验证码', trigger: 'change' }],
 
 })
+
+const store = indexStore()
 
 onMounted(() => {
     loadCaptcha()
@@ -84,6 +87,7 @@ const handleSubmit = async () => {
     }
     loading.value = true
     const loginData = await login(user).finally(() => { loading.value = false })
+    store.setUser(loginData.data.userInfo)
     router.replace({
         name: 'home'
     })

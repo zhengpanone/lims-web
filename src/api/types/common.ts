@@ -31,7 +31,7 @@ export interface ILoginRresponse {
   expires_time: number
   menus: IMenu[]
   unique_auth: string[]
-  user_info: IUserInfo
+  userInfo: IUserInfo
   logo: string
   logo_square: string
   version: string
