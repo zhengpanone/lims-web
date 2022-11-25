@@ -1,12 +1,12 @@
 import { defineStore, createPinia } from 'pinia'
 import { IUserInfo } from '@/api/types/common'
+import { setItem, getItem } from '@/utils/storage'
+import { USER } from '@/utils/constants'
 
 const state = {
   count: 1,
   isCollapse: false,
-  user: JSON.parse(
-    window.localStorage.getItem('user') || 'null'
-  ) as IUserInfo | null,
+  user: getItem<IUserInfo>(USER),
 }
 
 export type State = typeof state
@@ -21,7 +21,7 @@ export const indexStore = defineStore('index', {
     },
     setUser(user: IUserInfo) {
       this.user = user
-      window.localStorage.setItem('user', JSON.stringify(user))
+      setItem(USER, JSON.stringify(user))
     },
   },
 
