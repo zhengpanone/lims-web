@@ -1,10 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios'
-
+import { ElMessage } from 'element-plus'
 const request = axios.create({
   // baseURL: import.meta.env.VITE_API_BASEURL,
 })
 // 请求拦截器
-axios.interceptors.request.use(
+request.interceptors.request.use(
   function (config) {
     // 统一设置用户身份 token
     return config
@@ -14,12 +14,21 @@ axios.interceptors.request.use(
   }
 )
 // 响应拦截器
-axios.interceptors.response.use(
+request.interceptors.response.use(
   function (response) {
     // 统一处理接口响应错误,如token过期、服务端异常
+    console.log(response.data)
+
+    if (response.data.code && response.data.code != 200) {
+      ElMessage.error(response.data.msg || '请求失败,请联系管理员')
+      // 手动返回promise异常
+      return Promise.reject(response.data)
+    }
     return response
   },
   function (error) {
+    console.log(error)
+
     return Promise.reject(error)
   }
 )

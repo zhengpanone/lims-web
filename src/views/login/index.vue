@@ -1,6 +1,7 @@
 <template>
     <div class="login-container">
-        <el-form class="login-form" ref="form" :rules="rules" :model="user" size="medium">
+        <el-form class="login-form" ref="form" :rules="rules" :model="user" size="default"
+            @submit.prevent="handleSubmit">
             <div class="login-form__header">
                 <img class="login-logo" src="@/assets/login_logo.png" alt="拉勾心选">
             </div>
@@ -22,16 +23,16 @@
                     </template>
                 </el-input>
             </el-form-item>
-            <el-form-item prop="imgcode">
+            <el-form-item prop="imgCode">
                 <div class="imgcode-wrap">
-                    <el-input v-model="user.imgcode" placeholder="请输入验证码">
+                    <el-input v-model="user.imgCode" placeholder="请输入验证码">
                         <template #prefix>
                             <el-icon>
                                 <Lock />
                             </el-icon>
                         </template>
                     </el-input>
-                    <img class="imgcode" alt="验证码">
+                    <img class="imgcode" alt="验证码" :src="captchaSrc" @click="loadCaptcha">
                 </div>
             </el-form-item>
             <el-form-item>
@@ -43,28 +44,50 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { getLoginInfo } from '@/api/common'
+import { getCaptcha, login } from '@/api/common'
 import type { ILoginInfo } from '@/api/types/common'
 import { onMounted, reactive, ref } from 'vue'
 import { User, Lock, Key } from '@element-plus/icons-vue';
+import { ElForm } from 'element-plus';
+import router from '@/router/index';
+
+const captchaSrc = ref('')
+const form = ref<InstanceType<typeof ElForm> | null>(null)
 
 const user = reactive({
-    account: 'admin', pwd: '123456', imgcode: 'qazw'
+    account: 'admin', pwd: '123456', imgCode: ''
 })
 const loading = ref(false)
 
 const rules = reactive({
     account: [{ required: true, message: '请输入账号', trigger: 'change' }],
     pwd: [{ required: true, message: '请输入密码', trigger: 'change' }],
-    imgcode: [{ required: true, message: '请输入验证码', trigger: 'change' }],
+    imgCode: [{ required: true, message: '请输入验证码', trigger: 'change' }],
 })
 const list = ref<ILoginInfo['slide']>([])
 onMounted(() => {
-    getLoginInfo().then(res => {
-        console.log(res.data);
-        list.value = res.data.slide
-    })
+    loadCaptcha()
 })
+
+const loadCaptcha = async () => {
+    const data = await getCaptcha()
+    captchaSrc.value = URL.createObjectURL(data)
+
+}
+
+const handleSubmit = async () => {
+    const valid = await form.value?.validate()
+    console.log(valid)
+    if (!valid) {
+        return
+    }
+    loading.value = true
+    const loginData = await login(user).finally(() => { loading.value = false })
+    router.replace({
+        name: 'home'
+    })
+
+}
 </script>
 <style scoped lang="scss">
 .login-container {
