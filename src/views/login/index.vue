@@ -45,26 +45,27 @@
 </template>
 <script lang="ts" setup>
 import { getCaptcha, login } from '@/api/common'
-import type { ILoginInfo } from '@/api/types/common'
 import { onMounted, reactive, ref } from 'vue'
 import { User, Lock, Key } from '@element-plus/icons-vue';
 import { ElForm } from 'element-plus';
 import router from '@/router/index';
+import type { IElForm, IFormRule } from '@/types/element-plus'
 
-const captchaSrc = ref('')
-const form = ref<InstanceType<typeof ElForm> | null>(null)
+const captchaSrc = ref('') // 验证码图片src
+const form = ref<IElForm | null>(null) // 登录表单
 
 const user = reactive({
     account: 'admin', pwd: '123456', imgCode: ''
 })
-const loading = ref(false)
+const loading = ref(false) // 是否加载
 
-const rules = reactive({
+const rules = reactive<IFormRule>({
     account: [{ required: true, message: '请输入账号', trigger: 'change' }],
     pwd: [{ required: true, message: '请输入密码', trigger: 'change' }],
     imgCode: [{ required: true, message: '请输入验证码', trigger: 'change' }],
+
 })
-const list = ref<ILoginInfo['slide']>([])
+
 onMounted(() => {
     loadCaptcha()
 })
