@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { ElMessage } from 'element-plus'
+import store, { indexStore } from '@/store/index'
+
 const request = axios.create({
   // baseURL: import.meta.env.VITE_API_BASEURL,
 })
@@ -7,6 +9,10 @@ const request = axios.create({
 request.interceptors.request.use(
   function (config) {
     // 统一设置用户身份 token
+    const user = indexStore().user
+    if (user && user.token && config.headers) {
+      config.headers.Authorization = `Bearer ${user.token}`
+    }
     return config
   },
   function (error) {

@@ -34,3 +34,13 @@ export const login = (data: {
     data,
   })
 }
+
+export const logout = () => {
+  return request<IResponseData<null>>({
+    method: 'POST',
+    url: '/api/user/logout',
+    headers: {
+      Authorization: 'Bearer token',
+    },
+  })
+}

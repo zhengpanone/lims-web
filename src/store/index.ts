@@ -6,7 +6,7 @@ import { USER } from '@/utils/constants'
 const state = {
   count: 1,
   isCollapse: false,
-  user: getItem<IUserInfo>(USER),
+  user: getItem<({ token: string } & IUserInfo) | null>(USER),
 }
 
 export type State = typeof state
@@ -19,7 +19,7 @@ export const indexStore = defineStore('index', {
     setIsCollapse(payload: boolean) {
       this.isCollapse = payload
     },
-    setUser(user: IUserInfo) {
+    setUser(user: ({ token: string } & IUserInfo) | null) {
       this.user = user
       setItem(USER, JSON.stringify(user))
     },
