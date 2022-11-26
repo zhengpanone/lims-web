@@ -3,6 +3,9 @@ import { IUserInfo } from '@/api/types/common'
 import { setItem, getItem } from '@/utils/storage'
 import { USER } from '@/utils/constants'
 
+// 创建pinia
+export const store = createPinia()
+
 const state = {
   count: 1,
   isCollapse: false,
@@ -27,7 +30,3 @@ export const indexStore = defineStore('index', {
 
   getters: {},
 })
-
-const store = createPinia()
-
-export default store

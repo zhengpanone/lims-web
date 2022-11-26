@@ -3,11 +3,15 @@ import ProductRoutes from './modules/product'
 import AppLayout from '@/layout/AppLayout.vue'
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { indexStore } from '@/store/index'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: AppLayout,
+    meta: {
+      requireAuth: true,
+    },
     children: [
       {
         path: '', // 默认子路由
@@ -32,7 +36,14 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach(() => {
+router.beforeEach((to, from) => {
+  const store = indexStore()
+  if (to.meta.requireAuth && !store.$state.user) {
+    return {
+      path: '/login',
+      query: { redirect: to.fullPath },
+    }
+  }
   nprogress.start()
 })
 

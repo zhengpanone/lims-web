@@ -46,11 +46,14 @@
 <script lang="ts" setup>
 import { getCaptcha, login } from '@/api/common'
 import { onMounted, reactive, ref } from 'vue'
-import { User, Lock, Key } from '@element-plus/icons-vue';
+import { User, Lock } from '@element-plus/icons-vue';
 import { ElForm } from 'element-plus';
-import router from '@/router/index';
+import { useRouter, useRoute } from 'vue-router';
 import type { IElForm, IFormRule } from '@/types/element-plus'
 import { indexStore } from '@/store/index'
+
+const router = useRouter()
+const route = useRoute()
 
 const captchaSrc = ref('') // 验证码图片src
 const form = ref<IElForm | null>(null) // 登录表单
@@ -67,7 +70,7 @@ const rules = reactive<IFormRule>({
 
 })
 
-const store = indexStore()
+
 
 onMounted(() => {
     loadCaptcha()
@@ -81,16 +84,18 @@ const loadCaptcha = async () => {
 
 const handleSubmit = async () => {
     const valid = await form.value?.validate()
-    console.log(valid)
     if (!valid) {
         return
     }
     loading.value = true
     const loginData = await login(user).finally(() => { loading.value = false })
+    const store = indexStore()
     store.setUser({ ...loginData.data.userInfo, token: loginData.data.token })
-    router.replace({
-        name: 'home'
-    })
+    let redirect = route.query.redirect || '/'
+    if (typeof redirect !== 'string') {
+        redirect = '/'
+    }
+    router.replace(redirect)
 
 }
 </script>

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { ElMessage } from 'element-plus'
-import store, { indexStore } from '@/store/index'
+import { indexStore } from '@/store/index'
 
 const request = axios.create({
   // baseURL: import.meta.env.VITE_API_BASEURL,
@@ -23,7 +23,6 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   function (response) {
     // 统一处理接口响应错误,如token过期、服务端异常
-    console.log(response.data)
 
     if (response.data.code && response.data.code != 200) {
       ElMessage.error(response.data.msg || '请求失败,请联系管理员')
@@ -33,8 +32,6 @@ request.interceptors.response.use(
     return response
   },
   function (error) {
-    console.log(error)
-
     return Promise.reject(error)
   }
 )
