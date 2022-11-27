@@ -7,7 +7,7 @@ export interface IListParams {
 }
 
 export interface Admin {
-  id: number
+  id: string
   account: string
   head_pic: string
   pwd: string

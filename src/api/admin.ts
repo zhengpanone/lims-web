@@ -22,7 +22,7 @@ export const getAdmins = (params: IListParams) => {
 export const createAdmin = (data: AdminPostData) => {
   return request<IResponseData<null>>({
     method: 'POST',
-    url: '/setting/admin',
+    url: '/api/setting/admin',
     data: data,
   })
 }
@@ -35,7 +35,7 @@ export const createAdmin = (data: AdminPostData) => {
 export const updateAdmin = (id: string, data: AdminPostData) => {
   return request<IResponseData<null>>({
     method: 'PUT',
-    url: `/setting/admin/${id}`,
+    url: `/api/setting/admin/${id}`,
     data: data,
   })
 }
@@ -43,13 +43,13 @@ export const updateAdmin = (id: string, data: AdminPostData) => {
 export const deleteAdmin = (id: string) => {
   return request<IResponseData<null>>({
     method: 'DELETE',
-    url: `/setting/admin/${id}`,
+    url: `/api/setting/admin/${id}`,
   })
 }
 
 export const updateAdminStatus = (id: string, status: number) => {
   return request<IResponseData<null>>({
     method: 'PUT',
-    url: `/setting/admin/status/${id}/${status}`,
+    url: `/api/setting/admin/status/${id}/${status}`,
   })
 }
