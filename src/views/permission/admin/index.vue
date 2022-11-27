@@ -79,7 +79,10 @@
         :disabled="listLoading" />
     </el-card>
   </el-col>
-  <AdminForm v-model="formVisible" v-model:admin-id="adminId" />
+  <AdminForm
+    v-model="formVisible"
+    v-model:admin-id="adminId"
+    @success="handleSuccess" />
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted } from 'vue'
@@ -129,6 +132,10 @@ const handleDelete = async (id: string) => {
 const handleUpdate = (id: string) => {
   adminId.value = id
   formVisible.value = true
+}
+const handleSuccess = () => {
+  formVisible.value = false
+  loadList()
 }
 onMounted(() => {
   loadList()

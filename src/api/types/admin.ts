@@ -26,7 +26,6 @@ export interface Admin {
 }
 
 export interface AdminPostData {
-  id?: string
   account: string
   pwd: string
   confPwd: string

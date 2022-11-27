@@ -57,7 +57,7 @@ export const getAdmin = (id: string) => {
 export const updateAdminStatus = (id: string, status: number) => {
   return request<IResponseData<null>>({
     method: 'PUT',
-    url: `/api/setting/admin/status/${id}/${status}`,
+    url: `/api/setting/admin/status/${id}/status/${status}`,
   })
 }
 
