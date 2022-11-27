@@ -50,7 +50,7 @@ const list = ref<Admin[]>([]) // 列表数据
 const listCount = ref(0)
 const listParams = reactive({
     page: 1,
-    limit: 10,
+    limit: 1,
     name: '',
     roles: '',
     status: '' as IListParams['status']

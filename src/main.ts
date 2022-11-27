@@ -13,9 +13,7 @@ const modules: Record<string, any> = import.meta.glob(
   './components/**/index.ts',
   { eager: true }
 )
-console.log(modules)
 for (let path in modules) {
-  console.log(typeof modules[path].default)
   app.use(modules[path].default)
 }
 
