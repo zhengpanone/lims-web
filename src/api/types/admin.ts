@@ -26,10 +26,11 @@ export interface Admin {
 }
 
 export interface AdminPostData {
+  id?: string
   account: string
-  conf_pwd: string
   pwd: string
+  confPwd: string
   roles: number[]
   status: 0 | 1
-  real_name: string
+  realName: string
 }

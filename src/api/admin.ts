@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import { Admin, AdminPostData, IListParams } from './types/admin'
-import { IResponseData } from './types/common'
+import { IDict, IResponseData } from './types/common'
 
 export const getAdmins = (params: IListParams) => {
   return request<
@@ -47,9 +47,23 @@ export const deleteAdmin = (id: string) => {
   })
 }
 
+export const getAdmin = (id: string) => {
+  return request<IResponseData<AdminPostData>>({
+    method: 'GET',
+    url: `/api/setting/admin/:${id}/edit`,
+  })
+}
+
 export const updateAdminStatus = (id: string, status: number) => {
   return request<IResponseData<null>>({
     method: 'PUT',
     url: `/api/setting/admin/status/${id}/${status}`,
+  })
+}
+
+export const getRoles = () => {
+  return request<IResponseData<[IDict]>>({
+    method: 'GET',
+    url: '/api/setting/admin/roles',
   })
 }

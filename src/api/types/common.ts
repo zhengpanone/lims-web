@@ -37,3 +37,8 @@ export interface ILoginRresponse {
   version: string
   newOrderAudioLink: string
 }
+
+export interface IDict {
+  code: string
+  name: string
+}
