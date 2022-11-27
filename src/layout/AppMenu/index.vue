@@ -41,8 +41,8 @@
                 </el-icon>
                 <span>权限</span>
             </template>
+            <el-menu-item index="/permission/admin">管理员</el-menu-item>
             <el-menu-item index="/">角色</el-menu-item>
-            <el-menu-item index="/">管理员</el-menu-item>
             <el-menu-item index="/">权限规则</el-menu-item>
         </el-sub-menu>
     </el-menu>

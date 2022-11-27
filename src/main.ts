@@ -6,4 +6,17 @@ import { store } from './store/'
 import ElementPlus from './plugins/element-plus'
 // 加载全局样式,只能加载非变量、mixin
 import './styles/index.scss'
-createApp(App).use(store).use(router).use(ElementPlus).mount('#app')
+import Module from 'module'
+const app = createApp(App)
+app.use(store).use(router).use(ElementPlus)
+const modules: Record<string, any> = import.meta.glob(
+  './components/**/index.ts',
+  { eager: true }
+)
+console.log(modules)
+for (let path in modules) {
+  console.log(typeof modules[path].default)
+  app.use(modules[path].default)
+}
+
+app.mount('#app')

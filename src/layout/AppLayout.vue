@@ -36,6 +36,11 @@ import AppHeader from './AppHeader/index.vue'
             justify-content: space-between;
             align-items: center;
         }
+
+        .el-main {
+            background-color: #E9EEF3;
+            color: #333;
+        }
     }
 }
 </style>
