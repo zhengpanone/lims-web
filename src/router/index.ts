@@ -30,6 +30,9 @@ const routes: RouteRecordRaw[] = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/login/index.vue'),
+    meta: {
+      title: '登录'
+    }
   },
 ] // 路由规则
 
@@ -37,7 +40,7 @@ const router = createRouter({
   history: createWebHashHistory(), // 路由模式
   routes,
 })
-
+// 全局前置守卫
 router.beforeEach((to, from) => {
   const store = indexStore()
   if (to.meta.requireAuth && !store.$state.user) {

@@ -21,6 +21,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.join(__dirname, 'src'),
+      'vue-i18n':'vue-i18n/dist/vue-i18n.cjs.js'
     },
   },
   css: {
@@ -31,13 +32,28 @@ export default defineConfig({
     },
   },
   envDir: path.resolve(__dirname, './env'),
-  // server: {
-  //   proxy: {
-  //     '/api': {
-  //       target: 'http://127.0.0.1:8081',
-  //       changeOrigin: true,
-  //       rewrite: (path) => path.replace(/^\/api/, ''), // 路径重写
-  //     },
-  //   },
-  // },
+  server: {
+    https: false,
+    port: 3000,
+    host: '0.0.0.0',
+    open: true,
+    cors: true, // 允许跨域
+    /*proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8081',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''), // 路径重写
+      },
+    },*/
+  }, 
+  build:{
+     // 设置最终构建的浏览器兼容目标
+     target: 'es2015',
+     // 构建后是否生成 source map 文件
+     sourcemap: false,
+     //  chunk 大小警告的限制（以 kbs 为单位）
+     chunkSizeWarningLimit: 2000,
+     // 启用/禁用 gzip 压缩大小报告
+     reportCompressedSize: false,
+  }
 })

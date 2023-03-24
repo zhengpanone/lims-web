@@ -12,11 +12,11 @@ const i18n = createI18n({
 })
 
 export function getLanguage(){
-    const chooseLanguage = localCache.getItem(LANGUAGE)
+    const chooseLanguage = localStorage.getItem('lang')
     if(chooseLanguage) return chooseLanguage
     const language = navigator.language.toLowerCase()
     const locales = [LANG_VALUE.En, LANG_VALUE.Zh]
-    if(const locale of locales){
+    for(let locale of locales){
         if(language.indexOf(locale)>-1){
             return locale
         }
