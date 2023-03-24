@@ -2,7 +2,7 @@
  * 公共基础接口封装
  */
 import request from '@/utils/request'
-import { IResponseData, ILoginInfo, ILoginRresponse } from './types/common'
+import { IResponseData, ILoginInfo, ILoginRresponse, ILoginData } from './types/common'
 
 export const getLoginInfo = () => {
   return request<IResponseData<ILoginInfo>>({
@@ -23,11 +23,7 @@ export const getCaptcha = () => {
   })
 }
 
-export const login = (data: {
-  account: string
-  pwd: string
-  imgCode: string
-}) => {
+export const login = (data: ILoginData) => {
   return request<IResponseData<ILoginRresponse>>({
     method: 'POST',
     url: '/api/user/login',

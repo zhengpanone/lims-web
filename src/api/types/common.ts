@@ -3,7 +3,14 @@ export interface IResponseData<T> {
   msg: string
   data: T
 }
-
+/**
+ * 登录接口参数
+ */
+export interface ILoginData {
+  account: string
+  pwd: string
+  imgCode: string
+}
 export interface ILoginInfo {
   slide: string[]
   logoSquare: string

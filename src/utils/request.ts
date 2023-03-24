@@ -1,15 +1,17 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { indexStore } from '@/store/'
 import router from '@/router/'
 
-const request = axios.create({
+// 创建实例
+const request: AxiosInstance = axios.create({
   // baseURL: import.meta.env.VITE_API_BASEURL,
 })
 
 // 请求拦截器
 request.interceptors.request.use(
-  function (config) {
+  (config: AxiosRequestConfig) => {
     // 统一设置用户身份 token
     const store = indexStore()
     const user = store.$state.user
@@ -18,7 +20,7 @@ request.interceptors.request.use(
     }
     return config
   },
-  function (error) {
+  (error: AxiosError) => {
     return Promise.reject(error)
   }
 )
@@ -26,7 +28,7 @@ request.interceptors.request.use(
 let isRefreshing = false
 // 响应拦截器
 request.interceptors.response.use(
-  function (response) {
+  (response: AxiosResponse) => {
     const store = indexStore()
     // 统一处理接口响应错误,如token过期、服务端异常
     const status = response.data.code
@@ -69,7 +71,7 @@ request.interceptors.response.use(
     // 手动返回promise异常
     return Promise.reject(response)
   },
-  function (error) {
+  (error: AxiosError) => {
     return Promise.reject(error)
   }
 )
