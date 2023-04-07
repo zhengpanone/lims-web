@@ -3,7 +3,7 @@ export default [
     {
         url: '/api/user/login',
         method: 'POST',
-        response: (res) => {
+        response: (res: any) => {
             return {
                 code: 200,
                 message: 'success',
@@ -17,7 +17,7 @@ export default [
     {
         url: '/api/user/info',
         method: 'GET',
-        response: (res) => {
+        response: (res: any) => {
             return {
                 code: 200,
                 message: 'success',
@@ -31,11 +31,11 @@ export default [
         }
 
     },
-    // 一个失败的请求
+    // 退出登录
     {
-        url: "/api/error",
-        method: "get",
-        response: (res) => {
+        url: "/api/user/logout",
+        method: "post",
+        response: (res: any) => {
             return {
                 code: 1,
                 message: '密码错误',
@@ -43,4 +43,17 @@ export default [
             }
         }
     }
+    // 一个失败的请求
+    {
+        url: "/api/error",
+        method: "get",
+        response: (res: any) => {
+            return {
+                code: 1,
+                message: '密码错误',
+                data: null
+            }
+        }
+    }
+
 ]
