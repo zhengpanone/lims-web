@@ -3,7 +3,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosResponse } fro
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { indexStore } from '@/store/'
 import router from '@/router/'
-
+// import eventEmiter from './eventEmiter'
 // 创建实例
 const request: AxiosInstance = axios.create({
   // baseURL: import.meta.env.VITE_API_BASEURL,
@@ -42,6 +42,7 @@ request.interceptors.response.use(
       if (isRefreshing) return Promise.reject(response)
       isRefreshing = true
       // token过期
+      // eventEmiter.emit('API:UN_AUTH');
       ElMessageBox.confirm(
         '你的登录已经过期,您可以取消停留在此页面,或确认重新登录',
         '登录过期',
@@ -65,13 +66,16 @@ request.interceptors.response.use(
           isRefreshing = false
         })
       return Promise.reject(response)
-    }
+    }/**else if(status===400){
+      eventEmiter.emit('API:VALIDATE_ERROR',response.data.data)
+    }*/
 
     ElMessage.error(response.data.msg || '请求失败,请联系管理员')
     // 手动返回promise异常
     return Promise.reject(response)
   },
   (error: AxiosError) => {
+    // eventEmiter.emit('API:UN_AUTH')
     return Promise.reject(error)
   }
 )

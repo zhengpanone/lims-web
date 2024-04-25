@@ -6,6 +6,8 @@ import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { indexStore } from '@/store/index'
 
+// import eventEmiter from '@/utils/eventEmiter'
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -55,5 +57,9 @@ router.beforeEach((to, from) => {
 router.afterEach(() => {
   nprogress.done()
 })
+
+// eventEmiter.on('API:UN_AUTH',()=>{
+//   router.push('/')
+// })
 
 export default router
